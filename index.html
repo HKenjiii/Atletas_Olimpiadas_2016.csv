@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabela CSV</title>
+    <title>Dados do CSV</title>
     <style>
         table {
             width: 100%;
@@ -17,13 +17,13 @@
     </style>
 </head>
 <body>
-    <h1>Dados do CSV</h1>
+    <h1>Tabela de Dados</h1>
     <table id="csvTable"></table>
 
     <script>
-        // Função para ler e exibir o CSV
+        // Função para carregar e exibir o CSV
         function loadCSV() {
-            fetch('Atletas Olimpiadas 2016.csv') // substitua 'dados.csv' pelo nome do seu arquivo CSV
+            fetch('dados.csv')
                 .then(response => response.text())
                 .then(data => {
                     const table = document.getElementById('csvTable');
@@ -33,7 +33,7 @@
                         const tr = document.createElement('tr');
                         cols.forEach(col => {
                             const cell = document.createElement(index === 0 ? 'th' : 'td');
-                            cell.textContent = col;
+                            cell.textContent = col.trim();
                             tr.appendChild(cell);
                         });
                         table.appendChild(tr);
@@ -41,7 +41,6 @@
                 });
         }
 
-        // Carrega o CSV quando a página carrega
         window.onload = loadCSV;
     </script>
 </body>
