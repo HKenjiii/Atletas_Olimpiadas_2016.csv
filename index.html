@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela CSV</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dados do CSV</h1>
+    <table id="csvTable"></table>
+
+    <script>
+        // Função para ler e exibir o CSV
+        function loadCSV() {
+            fetch('Atletas Olimpiadas 2016.csv') // substitua 'dados.csv' pelo nome do seu arquivo CSV
+                .then(response => response.text())
+                .then(data => {
+                    const table = document.getElementById('csvTable');
+                    const rows = data.split('\n');
+                    rows.forEach((row, index) => {
+                        const cols = row.split(',');
+                        const tr = document.createElement('tr');
+                        cols.forEach(col => {
+                            const cell = document.createElement(index === 0 ? 'th' : 'td');
+                            cell.textContent = col;
+                            tr.appendChild(cell);
+                        });
+                        table.appendChild(tr);
+                    });
+                });
+        }
+
+        // Carrega o CSV quando a página carrega
+        window.onload = loadCSV;
+    </script>
+</body>
+</html>
